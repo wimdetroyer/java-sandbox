@@ -24,6 +24,6 @@ public class DumbDTOMapperTest {
         }, "subClass.vatNumber").isEqualTo(actual);
 
         // Will fail:
-        //Assertions.assertThat(expected).usingRecursiveComparison().isEqualTo(actual);
+        Assertions.assertThat(expected).usingRecursiveComparison().isEqualTo(actual);
     }
 }
