@@ -20,7 +20,7 @@ public class UserTestMother {
         // lomboks lack of a composite builder make the following clunky.
         userBuilder.Organization(OrganisationTestMother.validOrganization().build());
         var addressBuilder = AdressTestMother.validAddress();
-        userBuilder.AddressList(List.of(addressBuilder.build(), addressBuilder.build()));
+        userBuilder.addressList(List.of(addressBuilder.build(), addressBuilder.build()));
         return userBuilder;
     }
 }

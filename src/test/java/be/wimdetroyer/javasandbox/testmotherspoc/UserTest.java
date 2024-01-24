@@ -14,7 +14,7 @@ class UserTest {
         var addressBuilder = AdressTestMother.validAddress();
         addressBuilder.street("Visstraat");
         addressBuilder.number("83");
-        validuserBuilder.AddressList(List.of(addressBuilder.build()));
+        validuserBuilder.addressList(List.of(addressBuilder.build()));
         var user = validuserBuilder.build();
         Assertions.assertEquals(1, user.addressList().size());
     }
