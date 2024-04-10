@@ -1,41 +1,23 @@
 package be.wimdetroyer.javasandbox.visitor.oop.books;
 
+import be.wimdetroyer.javasandbox.visitor.oop.books.types.BookFlavour;
+import lombok.Getter;
+
+@Getter
 public abstract class Book {
 
-    private String isbn;
-    private String title;
-    private String author;
-    private String summary;
+    private final String isbn;
+    private final String title;
+    private final String author;
+    private final String summary;
+    private final BookFlavour bookFlavour;
 
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
+    public Book(String isbn, String title, String author, String summary, BookFlavour bookFlavour) {
         this.isbn = isbn;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
         this.summary = summary;
+        this.bookFlavour = bookFlavour;
     }
+
 }
