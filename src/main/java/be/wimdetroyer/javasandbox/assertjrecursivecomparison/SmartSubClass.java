@@ -7,6 +7,5 @@ import lombok.Setter;
 @Setter
 public class SmartSubClass {
 
-    private VatNumber vatNumber;
-
+  private VatNumber vatNumber;
 }

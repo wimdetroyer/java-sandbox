@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class DumbDTOSubClass {
 
-    private String vatNumber;
+  private String vatNumber;
 }

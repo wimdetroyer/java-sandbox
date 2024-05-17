@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class DumbDTO {
 
-    private DumbDTOSubClass subClass;
+  private DumbDTOSubClass subClass;
 }

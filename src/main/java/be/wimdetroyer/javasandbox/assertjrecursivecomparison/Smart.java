@@ -1,6 +1,5 @@
 package be.wimdetroyer.javasandbox.assertjrecursivecomparison;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class Smart {
 
-    private SmartSubClass subClass;
+  private SmartSubClass subClass;
 }
