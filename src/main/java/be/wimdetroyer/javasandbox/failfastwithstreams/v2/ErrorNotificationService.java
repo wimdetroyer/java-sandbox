@@ -1,4 +1,4 @@
-package be.wimdetroyer.javasandbox.failfastwithstreams;
+package be.wimdetroyer.javasandbox.failfastwithstreams.v2;
 
 public class ErrorNotificationService {
 

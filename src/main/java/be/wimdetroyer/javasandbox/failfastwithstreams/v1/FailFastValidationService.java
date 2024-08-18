@@ -1,4 +1,4 @@
-package be.wimdetroyer.javasandbox.failfastwithstreams;
+package be.wimdetroyer.javasandbox.failfastwithstreams.v1;
 
 import java.util.Optional;
 import java.util.function.Supplier;
