@@ -46,19 +46,19 @@ public class ImprovedList<T> implements List<T> {
         }
     }
 
-    // Delegate to other methods
+    // Delegate to other methods, synchronizing if necessary
     @Override
-    public int size() {
+    public synchronized int size() {
         return underlyingList.size();
     }
 
     @Override
-    public boolean isEmpty() {
+    public synchronized boolean isEmpty() {
         return false;
     }
 
     @Override
-    public boolean contains(Object o) {
+    public synchronized boolean contains(Object o) {
         return false;
     }
 
