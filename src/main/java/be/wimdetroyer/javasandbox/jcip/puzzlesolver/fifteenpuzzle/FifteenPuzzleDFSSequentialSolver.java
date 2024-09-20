@@ -11,7 +11,7 @@ public class FifteenPuzzleDFSSequentialSolver extends PuzzleSolver<FifteenPuzzle
     }
 
     public static void main(String[] args) {
-        var fifteenPuzzle = new FifteenPuzzle();
+        var fifteenPuzzle = new FifteenPuzzle(null);
         var fifteenPuzzleSolver = new FifteenPuzzleDFSSequentialSolver(fifteenPuzzle);
     }
 }
