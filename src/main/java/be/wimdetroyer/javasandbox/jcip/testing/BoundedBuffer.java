@@ -68,7 +68,7 @@ public class BoundedBuffer<E> implements IBoundedBuffer<E> {
 
     private synchronized E takeSynchronized() {
         var takenElement = internalArray[takeIndex];
-        internalArray[takeIndex] = null;
+        internalArray[takeIndex] = null; // important to manually dereference here not to cause mem leaks
         takeIndex++;
         if (takeIndex == internalArray.length) {
             takeIndex = 0;
