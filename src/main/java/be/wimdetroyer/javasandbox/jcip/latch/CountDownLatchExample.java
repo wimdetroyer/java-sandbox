@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CountDownLatchExample {
 
 
-    public static final int THREAD_COUNT = 10000;
+    public static final int THREAD_COUNT = 1000;
 
     public static void main(String[] args) {
         runWith100();

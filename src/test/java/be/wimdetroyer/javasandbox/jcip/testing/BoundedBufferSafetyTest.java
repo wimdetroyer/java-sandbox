@@ -57,6 +57,7 @@ class BoundedBufferSafetyTest {
                 exec.execute(new Consumer());
             }
             try {
+                // In general, use cyclic barrier to time threads so as much interleavings as possible are created.
                 barrier.await(); // 1st barrier will trip
                 // ... blocking at 2nd barrier
                 barrier.await(); // 2nd barrier will trip
@@ -81,7 +82,6 @@ class BoundedBufferSafetyTest {
                         sumForThread += seed;
                         seed = xorShift(seed);
                     }
-                    //TODO: why not addandget?
                     sumOfPuts.getAndAdd(sumForThread);
                     barrier.await(); // wait to fizzle out the thread until all others are done
                 } catch (Exception e) {
@@ -96,14 +96,14 @@ class BoundedBufferSafetyTest {
             public void run() {
                 try {
                     int sumForThread = 0;
-                    barrier.await(); // Wait until all the consumer threads are ready...
+                    barrier.await(); // Wait until all the consumer  & producer threads are ready...
 
                     // Do the execution...
                     for (int i = 0; i < trialsToRun; i++) {
                         sumForThread += buffer.take();
                     }
                     sumOfTakes.getAndAdd(sumForThread);
-                    // Wait until all the other consumer threads are finished...
+                    // Wait until all the other consumer & producer threads are finished...
                     barrier.await();
                 } catch (Exception e) {
                     throw new RuntimeException(e);
