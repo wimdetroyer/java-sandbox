@@ -14,12 +14,17 @@ public class BestNumberRange {
 
 
     public void setLower(int lower) {
-        while (true) {
+        while (true) { // keep trying until we win the CAS race
+            // 1. get the current numpair from the atomic reference. a thread local (stack confined) _snapshot_ of the current state!
             var oldNumPair = numPairAtomicReference.get();
+            //2.  check if lower is smaller than upper, so the thread does not break the invariant
             if(lower > oldNumPair.upper()) {
                 throw new IllegalArgumentException("Lower bound cannot be greater than upper bound");
             }
+            // 3. construct the new numpair using the old snapshot
             var newNumPair = new NumPair(lower, oldNumPair.upper());
+            //4. finally do the CAS operation to see if by the time we constructed oour new pair, the snapshot we took from the state still holds up to the current ref
+            // if it doesn't, we retry the operation
             if(numPairAtomicReference.compareAndSet(oldNumPair, newNumPair)) {
                 return;
             }
@@ -28,28 +33,27 @@ public class BestNumberRange {
     }
 
     public void setUpper(int upper) {
-        // Keep trying until CAS works for this thread
         while(true) {
             var oldNumPair = numPairAtomicReference.get(); // get the curr ref
             if(upper < oldNumPair.lower()) {
                 throw new IllegalArgumentException("Upper bound cannot be less than lower bound");
             }
             var newNumPair = new NumPair(oldNumPair.lower(), upper);
-            // value in the atomic reference from LOC 33 until 39 could have changed by now.
             if(numPairAtomicReference.compareAndSet(oldNumPair, newNumPair)) {
                 return;
             }
         }
     }
 
-}
+    @Immutable
+    record NumPair(int lower, int upper) {
 
-@Immutable
-record NumPair(int lower, int upper) {
-
-    public NumPair {
-        if(lower > upper) {
-            throw new IllegalArgumentException("Lower bound must be less than upper bound");
+        public NumPair {
+            if(lower > upper) {
+                throw new IllegalArgumentException("Lower bound must be less than upper bound");
+            }
         }
     }
+
 }
+
