@@ -14,10 +14,13 @@ public class BestNumberRange {
 
 
     public void setLower(int lower) {
-        while (true) { // keep trying until we win the CAS race
+        // keep trying until we win the CAS race. Note that this approach is prone to livelock; another thread could always be just in time
+        // to not let us be able to setLower, causing us to keep trying again ad infinitum.
+        while (true) {
             // 1. get the current numpair from the atomic reference. a thread local (stack confined) _snapshot_ of the current state!
             var oldNumPair = numPairAtomicReference.get();
             //2.  check if lower is smaller than upper, so the thread does not break the invariant
+            // fail fast in this caseinstead of trying again, because otherwise we would risk livelock
             if(lower > oldNumPair.upper()) {
                 throw new IllegalArgumentException("Lower bound cannot be greater than upper bound");
             }
